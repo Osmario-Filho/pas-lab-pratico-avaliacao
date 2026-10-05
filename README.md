@@ -20,7 +20,7 @@ Nenhum serviço acessa o banco de outro serviço.
 
 | Etapa | Conteúdo                            | Responsável | Situação  |
 |-------|-------------------------------------|-------------|-----------|
-| 1     | Estoque Service                     | Aluno B     | pendente  |
+| 1     | Estoque Service                     | Aluno B     | concluída |
 | 2     | Pedido Service                      | Aluno A     | concluída |
 | 3     | Integração REST Pedido → Estoque    | dupla       | pendente  |
 | 4     | Docker Compose                      | dupla       | pendente  |
