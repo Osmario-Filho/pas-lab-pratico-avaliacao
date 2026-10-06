@@ -1,0 +1,9 @@
+$ docker compose start pagamento-service
+ Container pas-lab-pratico-avaliacao-pagamento-db-1 Waiting 
+ Container pas-lab-pratico-avaliacao-rabbitmq-1 Waiting 
+ Container pas-lab-pratico-avaliacao-pagamento-db-1 Healthy 
+ Container pas-lab-pratico-avaliacao-rabbitmq-1 Healthy 
+ Container pas-lab-pratico-avaliacao-pagamento-service-1 Starting 
+ Container pas-lab-pratico-avaliacao-pagamento-service-1 Started 
+ Container pas-lab-pratico-avaliacao-pagamento-service-2 Starting 
+ Container pas-lab-pratico-avaliacao-pagamento-service-2 Started 

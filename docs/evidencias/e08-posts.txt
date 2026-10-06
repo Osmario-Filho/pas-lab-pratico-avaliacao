@@ -1,0 +1,4 @@
+$ for i in 1 2 3; do curl -s -w ' -> HTTP %{http_code}\n' -X POST localhost:8080/pedidos -H 'Content-Type: application/json' -d '{"produtoId": 2, "quantidade": 1}'; done
+{"id":2,"produtoId":2,"quantidade":1,"status":"AGUARDANDO_PAGAMENTO"} -> HTTP 201
+{"id":3,"produtoId":2,"quantidade":1,"status":"AGUARDANDO_PAGAMENTO"} -> HTTP 201
+{"id":4,"produtoId":2,"quantidade":1,"status":"AGUARDANDO_PAGAMENTO"} -> HTTP 201

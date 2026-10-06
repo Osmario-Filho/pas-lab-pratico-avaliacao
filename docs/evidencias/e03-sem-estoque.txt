@@ -1,0 +1,3 @@
+$ curl -s -i -X POST localhost:8080/pedidos -H 'Content-Type: application/json' -d '{"produtoId": 1, "quantidade": 999}' | grep -E '^HTTP|^\{'
+HTTP/1.1 409 
+{"mensagem":"Estoque insuficiente"}

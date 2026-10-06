@@ -1,0 +1,4 @@
+$ docker compose ps -a pagamento-service --format 'table {{.Name}}\t{{.State}}\t{{.Status}}'
+NAME                                            STATE     STATUS
+pas-lab-pratico-avaliacao-pagamento-service-1   exited    Exited (137) 4 seconds ago
+pas-lab-pratico-avaliacao-pagamento-service-2   exited    Exited (137) 4 seconds ago

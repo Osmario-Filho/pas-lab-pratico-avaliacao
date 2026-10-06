@@ -1,0 +1,4 @@
+$ docker compose logs pagamento-service | grep 90dd70d4-e3a8-4d86-97fa-ebfdb2eb3b9c
+pagamento-service-1  | 2026-10-06T00:27:30.205Z  INFO 1 --- [pagamento-service] [ntContainer#0-1] b.p.lab.pagamento.PedidoCriadoListener   : correlationId=90dd70d4-e3a8-4d86-97fa-ebfdb2eb3b9c Evento pedido.criado recebido 1
+pagamento-service-1  | 2026-10-06T00:27:31.034Z  INFO 1 --- [pagamento-service] [ntContainer#0-1] br.pas.lab.pagamento.PagamentoService    : correlationId=90dd70d4-e3a8-4d86-97fa-ebfdb2eb3b9c Pagamento aprovado 1
+pagamento-service-1  | 2026-10-06T00:27:31.130Z  INFO 1 --- [pagamento-service] [ntContainer#0-1] b.p.lab.pagamento.PedidoCriadoListener   : correlationId=90dd70d4-e3a8-4d86-97fa-ebfdb2eb3b9c Evento pagamento.processado publicado 1 APROVADO

@@ -12,6 +12,7 @@ serviço que lê ou altera a tabela `produto`; o Pedido Service só a alcança p
 | GET    | `/produtos`                  | `200` lista de produtos              | —                                                   |
 | GET    | `/produtos/{id}`             | `200` produto                        | `404` produto inexistente                           |
 | PUT    | `/produtos/{id}/reservar`    | `200` produto com a quantidade nova  | `404` inexistente, `409` estoque insuficiente, `400` corpo inválido |
+| PUT    | `/produtos/{id}/liberar`     | `200` produto com a quantidade nova  | `404` inexistente, `400` corpo inválido             |
 
 Erros seguem o mesmo formato do Pedido Service: `{"mensagem": "..."}`.
 
@@ -51,29 +52,45 @@ simultâneas deixem o estoque negativo, sem precisar de lock explícito. Se nenh
 o serviço consulta se o produto existe para escolher entre `404` e `409`; em ambos os casos o
 estoque não é alterado.
 
+## Compensação (Etapa 3)
+
+`PUT /produtos/{id}/liberar` devolve ao estoque uma quantidade reservada antes, com o mesmo corpo
+da reserva (`{"quantidade": n}`). O Pedido Service o chama quando reservou o estoque mas não
+conseguiu gravar o pedido, para desfazer a reserva. Não há transação entre os dois bancos, então
+a consistência depende dessa chamada.
+
+```bash
+curl -i -X PUT localhost:8081/produtos/1/liberar \
+     -H 'Content-Type: application/json' \
+     -d '{"quantidade": 2}'
+# HTTP/1.1 200
+# {"id":1,"nome":"Notebook","quantidade":10}
+```
+
 ## Correlação (Etapa 11)
 
-O cabeçalho opcional `X-Correlation-Id` da reserva é registrado nos logs:
+O cabeçalho opcional `X-Correlation-Id` da reserva e da liberação é registrado nos logs:
 
 ```
 correlationId=<id> Produto 1 reservado: quantidade=2 restante=8
+correlationId=<id> Produto 1 liberado (compensação): quantidade=2 restante=10
 ```
 
-O Pedido Service deve enviá-lo na chamada `PUT /produtos/{id}/reservar`. Sem o cabeçalho o log sai
-com `correlationId=null`.
+O Pedido Service o envia nas chamadas `PUT /produtos/{id}/reservar` e `PUT /produtos/{id}/liberar`.
+Sem o cabeçalho o log sai com `correlationId=null`.
 
 ## Banco de dados
 
 A tabela é criada pelo [`schema.sql`](src/main/resources/schema.sql) (mesmo DDL do roteiro) e
-populada pelo [`data.sql`](src/main/resources/data.sql) com `ON CONFLICT DO NOTHING`, então reiniciar
-o serviço não repõe o estoque já consumido. O Hibernate não gera DDL (`ddl-auto=none`). A conexão
+populada pelo [`data.sql`](src/main/resources/data.sql), que só insere os produtos cujo `id` ainda
+não existe (`WHERE NOT EXISTS`); então reiniciar o serviço não repõe o estoque já consumido. O Hibernate não gera DDL (`ddl-auto=none`). A conexão
 padrão é `jdbc:postgresql://localhost:5432/estoque` (usuário e senha `estoque`); no Docker Compose
 ela é sobrescrita por `SPRING_DATASOURCE_URL`, `SPRING_DATASOURCE_USERNAME` e
 `SPRING_DATASOURCE_PASSWORD`.
 
 ## Como executar isoladamente
 
-Enquanto o `docker-compose.yml` da Etapa 4 não existe:
+O sistema completo sobe com o `docker-compose.yml` da raiz. Para rodar só o Estoque:
 
 ```bash
 docker run -d --name estoque-db -p 5432:5432 \
@@ -98,3 +115,4 @@ todos partem do estoque inicial.
 - `PUT .../reservar` devolve o produto com a quantidade atualizada (o roteiro só exige `200`).
 - A API devolve `ProdutoResponse` em vez da entidade JPA.
 - `quantidade` ausente, zero ou negativa na reserva responde `400`.
+- `PUT /produtos/{id}/liberar` não está no roteiro: foi criado para a compensação da Etapa 3.

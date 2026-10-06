@@ -1,0 +1,3 @@
+$ docker compose stop pagamento-service
+ Container pas-lab-pratico-avaliacao-pagamento-service-1 Stopping 
+ Container pas-lab-pratico-avaliacao-pagamento-service-1 Stopped 

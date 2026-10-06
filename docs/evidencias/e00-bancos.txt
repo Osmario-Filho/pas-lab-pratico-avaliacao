@@ -1,0 +1,5 @@
+$ grep -n 'SPRING_DATASOURCE_URL' docker-compose.yml; grep -rn --include='*.java' -lE 'pedido-db|estoque-db|jdbc:' */src/main/java || echo '(nenhuma classe Java abre conexão direta com banco)'
+60:      SPRING_DATASOURCE_URL: jdbc:postgresql://estoque-db:5432/estoque
+72:      SPRING_DATASOURCE_URL: jdbc:postgresql://pedido-db:5432/pedido
+93:      SPRING_DATASOURCE_URL: jdbc:postgresql://pagamento-db:5432/pagamento
+(nenhuma classe Java abre conexão direta com banco)

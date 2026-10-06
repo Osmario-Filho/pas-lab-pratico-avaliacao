@@ -1,0 +1,3 @@
+$ curl -s -i -X POST localhost:8080/pedidos -H 'Content-Type: application/json' -d '{"produtoId": 1, "quantidade": 3}' | grep -E '^HTTP|^\{'
+HTTP/1.1 500 
+{"mensagem":"Falha simulada após a reserva do estoque"}

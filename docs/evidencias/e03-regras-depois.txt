@@ -1,0 +1,4 @@
+$ curl -s localhost:8080/pedidos; echo; curl -s localhost:8081/produtos/1; echo; docker compose exec -T rabbitmq rabbitmqctl list_queues -q name messages_ready consumers | grep pedido.criado
+[{"id":1,"produtoId":1,"quantidade":2,"status":"PAGO"}]
+{"id":1,"nome":"Notebook","quantidade":8}
+pedido.criado	0	1

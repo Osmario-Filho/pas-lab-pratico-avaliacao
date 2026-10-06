@@ -1,0 +1,5 @@
+$ PEDIDO_SIMULAR_FALHA_APOS_RESERVA=true PEDIDO_COMPENSACAO_HABILITADA=false docker compose up -d pedido-service 2>&1 | grep pedido-service
+ Container pas-lab-pratico-avaliacao-pedido-service-1 Recreate 
+ Container pas-lab-pratico-avaliacao-pedido-service-1 Recreated 
+ Container pas-lab-pratico-avaliacao-pedido-service-1 Starting 
+ Container pas-lab-pratico-avaliacao-pedido-service-1 Started 

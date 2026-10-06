@@ -1,0 +1,7 @@
+$ docker compose logs pagamento-service | grep -E 'Pagamento (aprovado|rejeitado) 1[1-6]$'
+pagamento-service-2  | 2026-10-06T00:31:06.554Z  INFO 1 --- [pagamento-service] [ntContainer#0-1] br.pas.lab.pagamento.PagamentoService    : correlationId=42845b96-0d1a-4bb8-a9b8-feedf32bffd5 Pagamento aprovado 12
+pagamento-service-2  | 2026-10-06T00:31:07.663Z  INFO 1 --- [pagamento-service] [ntContainer#0-1] br.pas.lab.pagamento.PagamentoService    : correlationId=2730331f-0973-4679-8150-3be0e8f35298 Pagamento rejeitado 14
+pagamento-service-2  | 2026-10-06T00:31:08.685Z  INFO 1 --- [pagamento-service] [ntContainer#0-1] br.pas.lab.pagamento.PagamentoService    : correlationId=93d2c9a1-0af9-43a8-9c3d-2a587d4eb4e0 Pagamento rejeitado 16
+pagamento-service-1  | 2026-10-06T00:31:06.560Z  INFO 1 --- [pagamento-service] [ntContainer#0-1] br.pas.lab.pagamento.PagamentoService    : correlationId=941ac841-688d-46f7-8861-06a82ab9e12f Pagamento aprovado 11
+pagamento-service-1  | 2026-10-06T00:31:07.649Z  INFO 1 --- [pagamento-service] [ntContainer#0-1] br.pas.lab.pagamento.PagamentoService    : correlationId=80c114b9-88a2-4d7b-b7cc-1d72c06efd83 Pagamento aprovado 13
+pagamento-service-1  | 2026-10-06T00:31:08.685Z  INFO 1 --- [pagamento-service] [ntContainer#0-1] br.pas.lab.pagamento.PagamentoService    : correlationId=75aa8e55-5aab-400a-baec-b34a95412951 Pagamento aprovado 15

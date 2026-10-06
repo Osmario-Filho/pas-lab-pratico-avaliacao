@@ -1,0 +1,7 @@
+$ docker compose logs pagamento-service | grep -E 'Pagamento (aprovado|rejeitado) ([5-9]|10)$'
+pagamento-service-1  | 2026-10-06T00:30:30.341Z  INFO 1 --- [pagamento-service] [ntContainer#0-1] br.pas.lab.pagamento.PagamentoService    : correlationId=edc7edb9-214b-4d76-899f-5abfb5da658e Pagamento rejeitado 5
+pagamento-service-1  | 2026-10-06T00:30:30.450Z  INFO 1 --- [pagamento-service] [ntContainer#0-1] br.pas.lab.pagamento.PagamentoService    : correlationId=b2f11ad7-ba86-48d4-8f9e-f6a0b804a665 Pagamento aprovado 7
+pagamento-service-1  | 2026-10-06T00:30:30.504Z  INFO 1 --- [pagamento-service] [ntContainer#0-1] br.pas.lab.pagamento.PagamentoService    : correlationId=f4db9ef2-434c-4e4a-8129-d990536f691f Pagamento aprovado 8
+pagamento-service-1  | 2026-10-06T00:30:30.553Z  INFO 1 --- [pagamento-service] [ntContainer#0-1] br.pas.lab.pagamento.PagamentoService    : correlationId=392fbf20-fad3-497c-bad1-7efc4f1fff25 Pagamento aprovado 9
+pagamento-service-1  | 2026-10-06T00:30:30.600Z  INFO 1 --- [pagamento-service] [ntContainer#0-1] br.pas.lab.pagamento.PagamentoService    : correlationId=ca609f0b-4c9c-40f9-8eb6-7eee76ed8fa1 Pagamento aprovado 10
+pagamento-service-2  | 2026-10-06T00:30:31.320Z  INFO 1 --- [pagamento-service] [ntContainer#0-1] br.pas.lab.pagamento.PagamentoService    : correlationId=45da6533-4749-4e8b-953a-0e7d69fe28be Pagamento aprovado 6

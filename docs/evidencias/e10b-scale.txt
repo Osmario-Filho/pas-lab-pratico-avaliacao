@@ -1,0 +1,5 @@
+$ PAGAMENTO_ATRASO_MS=1000 docker compose up -d --scale pagamento-service=2 2>&1 | grep -E 'pagamento-service-[12] (Recreated|Started)'
+ Container pas-lab-pratico-avaliacao-pagamento-service-2 Recreated 
+ Container pas-lab-pratico-avaliacao-pagamento-service-1 Recreated 
+ Container pas-lab-pratico-avaliacao-pagamento-service-1 Started 
+ Container pas-lab-pratico-avaliacao-pagamento-service-2 Started 

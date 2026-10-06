@@ -1,0 +1,4 @@
+$ grep -rn --include='*.java' -E 'estoque.service.url|uri\(' pedido-service/src/main/java
+pedido-service/src/main/java/br/pas/lab/pedido/EstoqueClient.java:26:    public EstoqueClient(@Value("${estoque.service.url}") String baseUrl) {
+pedido-service/src/main/java/br/pas/lab/pedido/EstoqueClient.java:37:                    .uri("/produtos/{id}/reservar", produtoId)
+pedido-service/src/main/java/br/pas/lab/pedido/EstoqueClient.java:60:                    .uri("/produtos/{id}/liberar", produtoId)

@@ -1,0 +1,4 @@
+$ docker compose exec -T rabbitmq rabbitmqctl list_queues -q name messages_ready messages_unacknowledged consumers
+name	messages_ready	messages_unacknowledged	consumers
+pagamento.processado	0	0	1
+pedido.criado	1	0	0

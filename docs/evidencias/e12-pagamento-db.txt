@@ -1,0 +1,7 @@
+$ docker compose exec -T pagamento-db psql -U pagamento -d pagamento -c 'select status, count(*) from pagamento group by status'
+  status   | count 
+-----------+-------
+ REJEITADO |     3
+ APROVADO  |    14
+(2 rows)
+
