@@ -47,4 +47,17 @@ public class ProdutoService {
                 correlationId, id, quantidade);
         throw new EstoqueInsuficienteException();
     }
+
+    // Compensação: desfaz uma reserva quando o pedido correspondente não pôde ser criado.
+    @Transactional
+    public Produto liberar(Long id, Integer quantidade, String correlationId) {
+        if (repository.liberar(id, quantidade) == 0) {
+            log.warn("correlationId={} Liberação recusada: produto {} inexistente", correlationId, id);
+            throw new ProdutoNaoEncontradoException();
+        }
+        Produto produto = repository.findById(id).orElseThrow(ProdutoNaoEncontradoException::new);
+        log.info("correlationId={} Produto {} liberado (compensação): quantidade={} restante={}",
+                correlationId, id, quantidade, produto.getQuantidade());
+        return produto;
+    }
 }

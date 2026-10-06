@@ -128,6 +128,27 @@ class ProdutoControllerTest {
                 .andExpect(jsonPath("$.mensagem").value("Requisição em formato inválido"));
     }
 
+    @Test
+    void liberarDevolveAsUnidadesReservadas() throws Exception {
+        mvc.perform(reservar(1, "{\"quantidade\": 4}"))
+                .andExpect(jsonPath("$.quantidade").value(6));
+
+        mvc.perform(put("/produtos/1/liberar")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"quantidade\": 4}"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.quantidade").value(10));
+    }
+
+    @Test
+    void liberarProdutoInexistenteRetorna404() throws Exception {
+        mvc.perform(put("/produtos/999/liberar")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"quantidade\": 1}"))
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.mensagem").value("Produto inexistente"));
+    }
+
     private static org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder reservar(
             long id, String corpo) {
         return put("/produtos/" + id + "/reservar")

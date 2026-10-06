@@ -21,6 +21,31 @@ public class ErroHandler {
         return Map.of("mensagem", e.getMessage());
     }
 
+    // Sem estoque: o pedido não é criado e nenhum evento é publicado.
+    @ExceptionHandler(EstoqueInsuficienteException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public Map<String, String> estoqueInsuficiente(EstoqueInsuficienteException e) {
+        return Map.of("mensagem", e.getMessage());
+    }
+
+    @ExceptionHandler(ProdutoInexistenteException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public Map<String, String> produtoInexistente(ProdutoInexistenteException e) {
+        return Map.of("mensagem", e.getMessage());
+    }
+
+    @ExceptionHandler(EstoqueIndisponivelException.class)
+    @ResponseStatus(HttpStatus.SERVICE_UNAVAILABLE)
+    public Map<String, String> estoqueIndisponivel(EstoqueIndisponivelException e) {
+        return Map.of("mensagem", e.getMessage());
+    }
+
+    @ExceptionHandler(FalhaSimuladaException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public Map<String, String> falhaSimulada(FalhaSimuladaException e) {
+        return Map.of("mensagem", e.getMessage());
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public Map<String, String> requisicaoInvalida(MethodArgumentNotValidException e) {

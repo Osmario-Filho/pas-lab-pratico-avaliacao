@@ -2,6 +2,7 @@ package br.pas.lab.pedido;
 
 import java.net.URI;
 import java.util.List;
+import java.util.UUID;
 
 import jakarta.validation.Valid;
 
@@ -25,8 +26,12 @@ public class PedidoController {
 
     @PostMapping
     public ResponseEntity<PedidoResponse> criar(@Valid @RequestBody CriarPedidoRequest request) {
-        Pedido pedido = service.criar(request);
+        // Etapa 11: um correlationId novo por requisição, propagado ao Estoque (cabeçalho),
+        // ao RabbitMQ (campo do evento) e aos logs de todos os serviços.
+        String correlationId = UUID.randomUUID().toString();
+        Pedido pedido = service.criar(request, correlationId);
         return ResponseEntity.created(URI.create("/pedidos/" + pedido.getId()))
+                .header("X-Correlation-Id", correlationId)
                 .body(PedidoResponse.de(pedido));
     }
 

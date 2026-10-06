@@ -39,4 +39,13 @@ public class ProdutoController {
             @RequestHeader(name = "X-Correlation-Id", required = false) String correlationId) {
         return ProdutoResponse.de(service.reservar(id, request.quantidade(), correlationId));
     }
+
+    // Compensação da reserva (Etapa 3): devolve ao estoque o que o Pedido Service reservou.
+    @PutMapping("/{id}/liberar")
+    public ProdutoResponse liberar(
+            @PathVariable Long id,
+            @Valid @RequestBody ReservarEstoqueRequest request,
+            @RequestHeader(name = "X-Correlation-Id", required = false) String correlationId) {
+        return ProdutoResponse.de(service.liberar(id, request.quantidade(), correlationId));
+    }
 }

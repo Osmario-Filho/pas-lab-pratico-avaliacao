@@ -49,4 +49,13 @@ public class Pedido {
     public StatusPedido getStatus() {
         return status;
     }
+
+    // Só um pedido que aguarda pagamento muda de status (PAGO ou REJEITADO); depois disso é final.
+    public boolean aplicarResultadoPagamento(StatusPedido novoStatus) {
+        if (status != StatusPedido.AGUARDANDO_PAGAMENTO || novoStatus == StatusPedido.AGUARDANDO_PAGAMENTO) {
+            return false;
+        }
+        this.status = novoStatus;
+        return true;
+    }
 }

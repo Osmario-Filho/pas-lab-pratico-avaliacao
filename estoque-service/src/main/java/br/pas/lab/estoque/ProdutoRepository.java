@@ -18,4 +18,9 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long> {
     @Query("update Produto p set p.quantidade = p.quantidade - :quantidade "
             + "where p.id = :id and p.quantidade >= :quantidade")
     int reservar(@Param("id") Long id, @Param("quantidade") Integer quantidade);
+
+    // Compensação da reserva: devolve as unidades ao estoque. Retorna 0 se o produto não existe.
+    @Modifying(clearAutomatically = true, flushAutomatically = true)
+    @Query("update Produto p set p.quantidade = p.quantidade + :quantidade where p.id = :id")
+    int liberar(@Param("id") Long id, @Param("quantidade") Integer quantidade);
 }
