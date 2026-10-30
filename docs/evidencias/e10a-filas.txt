@@ -1,0 +1,2 @@
+$ docker compose exec -T rabbitmq rabbitmqctl list_queues -q name messages_ready consumers | grep pedido.criado
+pedido.criado	0	2

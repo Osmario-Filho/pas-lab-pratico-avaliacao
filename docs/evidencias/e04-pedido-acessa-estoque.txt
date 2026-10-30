@@ -1,0 +1,2 @@
+$ docker compose exec -T pedido-service curl -s http://estoque-service:8080/produtos
+[{"id":1,"nome":"Notebook","quantidade":10},{"id":2,"nome":"Mouse","quantidade":50},{"id":3,"nome":"Teclado","quantidade":20}]

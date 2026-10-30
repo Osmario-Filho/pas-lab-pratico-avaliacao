@@ -1,0 +1,6 @@
+$ docker compose up -d --scale pagamento-service=2 2>&1 | grep pagamento-service
+ Container pas-lab-pratico-avaliacao-pagamento-service-1 Running 
+ Container pas-lab-pratico-avaliacao-pagamento-service-2 Creating 
+ Container pas-lab-pratico-avaliacao-pagamento-service-2 Created 
+ Container pas-lab-pratico-avaliacao-pagamento-service-2 Starting 
+ Container pas-lab-pratico-avaliacao-pagamento-service-2 Started 

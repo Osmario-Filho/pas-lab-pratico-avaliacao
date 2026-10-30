@@ -1,0 +1,9 @@
+$ docker compose ps --format 'table {{.Service}}\t{{.State}}\t{{.Status}}\t{{.Ports}}'
+SERVICE             STATE     STATUS                        PORTS
+estoque-db          running   Up About a minute (healthy)   5432/tcp
+estoque-service     running   Up About a minute             0.0.0.0:8081->8080/tcp, [::]:8081->8080/tcp
+pagamento-db        running   Up About a minute (healthy)   5432/tcp
+pagamento-service   running   Up About a minute             8080/tcp
+pedido-db           running   Up About a minute (healthy)   5432/tcp
+pedido-service      running   Up About a minute             0.0.0.0:8080->8080/tcp, [::]:8080->8080/tcp
+rabbitmq            running   Up About a minute (healthy)   0.0.0.0:5672->5672/tcp, [::]:5672->5672/tcp, 0.0.0.0:15672->15672/tcp, [::]:15672->15672/tcp

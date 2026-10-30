@@ -1,0 +1,22 @@
+$ docker compose exec -T pedido-db psql -U pedido -d pedido -c 'select id, produto_id, quantidade, status from pedido order by id'
+ id | produto_id | quantidade |  status   
+----+------------+------------+-----------
+  1 |          1 |          2 | PAGO
+  2 |          2 |          1 | PAGO
+  3 |          2 |          1 | PAGO
+  4 |          2 |          1 | PAGO
+  5 |          2 |          1 | REJEITADO
+  6 |          2 |          1 | PAGO
+  7 |          2 |          1 | PAGO
+  8 |          2 |          1 | PAGO
+  9 |          2 |          1 | PAGO
+ 10 |          2 |          1 | PAGO
+ 11 |          2 |          1 | PAGO
+ 12 |          2 |          1 | PAGO
+ 13 |          2 |          1 | PAGO
+ 14 |          2 |          1 | REJEITADO
+ 15 |          2 |          1 | PAGO
+ 16 |          2 |          1 | REJEITADO
+ 17 |          3 |          1 | PAGO
+(17 rows)
+

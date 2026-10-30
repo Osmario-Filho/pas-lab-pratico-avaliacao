@@ -1,0 +1,4 @@
+$ docker compose logs estoque-service pedido-service | grep -E 'Falha ao criar|Compensação desabilitada|reservado: quantidade=3'
+pedido-service-1  | 2026-10-06T00:28:05.865Z ERROR 1 --- [pedido-service] [nio-8080-exec-3] br.pas.lab.pedido.PedidoService          : correlationId=66cdaf08-abd8-45af-98e4-31cef2a0402a Falha ao criar pedido depois de reservar produto 1 (quantidade=3): Falha simulada após a reserva do estoque
+pedido-service-1  | 2026-10-06T00:28:05.866Z  WARN 1 --- [pedido-service] [nio-8080-exec-3] br.pas.lab.pedido.PedidoService          : correlationId=66cdaf08-abd8-45af-98e4-31cef2a0402a Compensação desabilitada: 3 unidade(s) do produto 1 continuam reservadas sem pedido
+estoque-service-1  | 2026-10-06T00:28:05.826Z  INFO 1 --- [estoque-service] [nio-8080-exec-2] br.pas.lab.estoque.ProdutoService        : correlationId=66cdaf08-abd8-45af-98e4-31cef2a0402a Produto 1 reservado: quantidade=3 restante=5

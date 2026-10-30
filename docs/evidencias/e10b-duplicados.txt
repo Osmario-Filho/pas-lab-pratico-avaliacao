@@ -1,0 +1,5 @@
+$ docker compose exec -T pagamento-db psql -U pagamento -d pagamento -c 'select pedido_id, count(*) from pagamento group by pedido_id having count(*) > 1'
+ pedido_id | count 
+-----------+-------
+(0 rows)
+

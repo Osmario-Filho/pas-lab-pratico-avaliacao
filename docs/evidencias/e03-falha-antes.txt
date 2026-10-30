@@ -1,0 +1,2 @@
+$ curl -s localhost:8081/produtos/1
+{"id":1,"nome":"Notebook","quantidade":8}

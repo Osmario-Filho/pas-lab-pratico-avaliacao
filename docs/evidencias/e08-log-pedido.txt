@@ -1,0 +1,7 @@
+$ docker compose logs pedido-service | grep -E 'Pedido [2-4] criado|Evento publicado [2-4]$'
+pedido-service-1  | 2026-10-06T00:28:56.928Z  INFO 1 --- [pedido-service] [nio-8080-exec-3] br.pas.lab.pedido.PedidoService          : correlationId=92a0abe4-de41-4958-a22e-690a2be95129 Pedido 2 criado: produtoId=2 quantidade=1 status=AGUARDANDO_PAGAMENTO
+pedido-service-1  | 2026-10-06T00:28:56.939Z  INFO 1 --- [pedido-service] [nio-8080-exec-3] b.pas.lab.pedido.PedidoEventoPublisher   : correlationId=92a0abe4-de41-4958-a22e-690a2be95129 Evento publicado 2
+pedido-service-1  | 2026-10-06T00:28:57.009Z  INFO 1 --- [pedido-service] [nio-8080-exec-5] br.pas.lab.pedido.PedidoService          : correlationId=b3dd0eb9-efbb-4dfc-b678-b73fa39d4ba0 Pedido 3 criado: produtoId=2 quantidade=1 status=AGUARDANDO_PAGAMENTO
+pedido-service-1  | 2026-10-06T00:28:57.011Z  INFO 1 --- [pedido-service] [nio-8080-exec-5] b.pas.lab.pedido.PedidoEventoPublisher   : correlationId=b3dd0eb9-efbb-4dfc-b678-b73fa39d4ba0 Evento publicado 3
+pedido-service-1  | 2026-10-06T00:28:57.069Z  INFO 1 --- [pedido-service] [nio-8080-exec-7] br.pas.lab.pedido.PedidoService          : correlationId=7e176ad4-b898-4a62-85b6-d62570ba9999 Pedido 4 criado: produtoId=2 quantidade=1 status=AGUARDANDO_PAGAMENTO
+pedido-service-1  | 2026-10-06T00:28:57.071Z  INFO 1 --- [pedido-service] [nio-8080-exec-7] b.pas.lab.pedido.PedidoEventoPublisher   : correlationId=7e176ad4-b898-4a62-85b6-d62570ba9999 Evento publicado 4

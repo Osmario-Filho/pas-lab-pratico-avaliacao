@@ -1,0 +1,2 @@
+$ curl -s localhost:8080/pedidos
+[{"id":1,"produtoId":1,"quantidade":2,"status":"PAGO"},{"id":2,"produtoId":2,"quantidade":1,"status":"PAGO"},{"id":3,"produtoId":2,"quantidade":1,"status":"PAGO"},{"id":4,"produtoId":2,"quantidade":1,"status":"PAGO"}]

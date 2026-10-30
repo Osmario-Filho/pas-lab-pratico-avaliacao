@@ -36,7 +36,7 @@
 			<scope>runtime</scope>
 		</dependency>
 
-		<!-- H2 só nos testes: em execução o serviço usa o PostgreSQL próprio (pedido-db) -->
+		<!-- H2 só nos testes: em execução o serviço usa o PostgreSQL próprio (estoque-db) -->
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>

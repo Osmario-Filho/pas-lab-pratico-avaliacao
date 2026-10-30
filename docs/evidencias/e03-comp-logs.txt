@@ -1,0 +1,5 @@
+$ docker compose logs estoque-service pedido-service | grep a231671b-ef92-4877-9e97-7e5c4103daab
+estoque-service-1  | 2026-10-06T00:28:31.252Z  INFO 1 --- [estoque-service] [nio-8080-exec-8] br.pas.lab.estoque.ProdutoService        : correlationId=a231671b-ef92-4877-9e97-7e5c4103daab Produto 1 reservado: quantidade=3 restante=5
+estoque-service-1  | 2026-10-06T00:28:31.323Z  INFO 1 --- [estoque-service] [nio-8080-exec-9] br.pas.lab.estoque.ProdutoService        : correlationId=a231671b-ef92-4877-9e97-7e5c4103daab Produto 1 liberado (compensação): quantidade=3 restante=8
+pedido-service-1   | 2026-10-06T00:28:31.304Z ERROR 1 --- [pedido-service] [nio-8080-exec-3] br.pas.lab.pedido.PedidoService          : correlationId=a231671b-ef92-4877-9e97-7e5c4103daab Falha ao criar pedido depois de reservar produto 1 (quantidade=3): Falha simulada após a reserva do estoque
+pedido-service-1   | 2026-10-06T00:28:31.331Z  INFO 1 --- [pedido-service] [nio-8080-exec-3] br.pas.lab.pedido.PedidoService          : correlationId=a231671b-ef92-4877-9e97-7e5c4103daab Reserva compensada: 3 unidade(s) do produto 1 devolvidas ao estoque

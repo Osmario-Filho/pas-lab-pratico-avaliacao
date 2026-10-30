@@ -1,0 +1,7 @@
+$ for s in estoque pedido pagamento; do echo "== $s-db"; docker compose exec -T $s-db psql -U $s -d $s -Atc "select table_name from information_schema.tables where table_schema='public'"; done
+== estoque-db
+produto
+== pedido-db
+pedido
+== pagamento-db
+pagamento

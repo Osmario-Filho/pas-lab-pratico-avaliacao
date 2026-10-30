@@ -1,0 +1,2 @@
+$ docker compose logs pagamento-service | grep 0cc517d6-d958-4794-9e84-c4b24ed5754b || echo '(nenhuma linha com esse correlationId)'
+(nenhuma linha com esse correlationId)

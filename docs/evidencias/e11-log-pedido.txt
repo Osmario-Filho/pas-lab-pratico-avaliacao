@@ -1,0 +1,3 @@
+$ docker compose logs pedido-service | grep 0cc517d6-d958-4794-9e84-c4b24ed5754b
+pedido-service-1  | 2026-10-06T00:31:38.088Z  INFO 1 --- [pedido-service] [nio-8080-exec-5] br.pas.lab.pedido.PedidoService          : correlationId=0cc517d6-d958-4794-9e84-c4b24ed5754b Pedido 17 criado: produtoId=3 quantidade=1 status=AGUARDANDO_PAGAMENTO
+pedido-service-1  | 2026-10-06T00:31:38.091Z  INFO 1 --- [pedido-service] [nio-8080-exec-5] b.pas.lab.pedido.PedidoEventoPublisher   : correlationId=0cc517d6-d958-4794-9e84-c4b24ed5754b Evento publicado 17

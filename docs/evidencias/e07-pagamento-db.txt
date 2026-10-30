@@ -1,0 +1,6 @@
+$ docker compose exec -T pagamento-db psql -U pagamento -d pagamento -c 'select * from pagamento'
+ id | pedido_id |  status  
+----+-----------+----------
+  1 |         1 | APROVADO
+(1 row)
+

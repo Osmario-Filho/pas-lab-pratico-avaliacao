@@ -1,0 +1,2 @@
+$ docker compose logs estoque-service | grep 90dd70d4-e3a8-4d86-97fa-ebfdb2eb3b9c
+estoque-service-1  | 2026-10-06T00:27:29.846Z  INFO 1 --- [estoque-service] [nio-8080-exec-2] br.pas.lab.estoque.ProdutoService        : correlationId=90dd70d4-e3a8-4d86-97fa-ebfdb2eb3b9c Produto 1 reservado: quantidade=2 restante=8

@@ -1,0 +1,2 @@
+$ curl -s localhost:8080/pedidos/17
+{"id":17,"produtoId":3,"quantidade":1,"status":"PAGO"}

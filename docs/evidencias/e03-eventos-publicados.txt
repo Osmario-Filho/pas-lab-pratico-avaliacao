@@ -1,0 +1,2 @@
+$ docker compose logs pedido-service | grep -c 'Evento publicado'
+1
