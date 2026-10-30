@@ -1,8 +1,9 @@
 # Entrega - Laboratório Avaliativo Prático: Construindo uma Arquitetura de Microsserviços
 
 **Integrantes:**
-- Aluno A: Vinícius
-- Aluno B: Osmario
+
+- Aluno A: Vinícius Silva Benevides
+- Aluno B: Osmario Filho
 
 ---
 
@@ -11,19 +12,19 @@
 ```mermaid
 flowchart TD
     Client([Cliente REST]) --> |POST /pedidos| PedidoService
-    
+  
     subgraph Microsserviços
         PedidoService[Pedido Service]
         EstoqueService[Estoque Service]
         PagamentoService[Pagamento Service]
     end
-    
+  
     subgraph Bancos de Dados
         PedidoDB[(pedido-db)]
         EstoqueDB[(estoque-db)]
         PagamentoDB[(pagamento-db)]
     end
-    
+  
     subgraph Mensageria
         RabbitMQ[[RabbitMQ]]
     end
@@ -31,7 +32,7 @@ flowchart TD
     PedidoService --- PedidoDB
     EstoqueService --- EstoqueDB
     PagamentoService --- PagamentoDB
-    
+  
     PedidoService -->|"PUT /produtos/{id}/reservar"| EstoqueService
     PedidoService -->|"Publica (pedido.criado)"| RabbitMQ
     RabbitMQ -->|"Consome"| PagamentoService
@@ -44,6 +45,7 @@ flowchart TD
 ## Parte 2 - Código-fonte dos serviços
 
 O código-fonte de todos os serviços está finalizado nas respectivas pastas do repositório:
+
 - `/estoque-service` (Aluno B)
 - `/pedido-service` (Aluno A)
 - `/pagamento-service` (Em dupla)
@@ -59,6 +61,7 @@ O arquivo `docker-compose.yml` encontra-se na raiz do projeto. Ele foi responsá
 ## Parte 4 - Prints demonstrando o funcionamento
 
 *(Cole aqui os prints que você tirar ao testar com o Postman! Você deve tirar print de:)*
+
 1. *Criação do pedido (POST no Pedido Service).*
 2. *Reserva do estoque (Log ou GET no Estoque Service).*
 3. *Publicação da mensagem (Print do log do Pedido Service ou tela do RabbitMQ).*
@@ -69,7 +72,9 @@ O arquivo `docker-compose.yml` encontra-se na raiz do projeto. Ele foi responsá
 ## Parte 5 - Respostas das Perguntas
 
 ### Experimento de consistência (Etapa 3)
+
 *Simulando falha após a reserva do estoque e antes da criação do pedido:*
+
 1. **O que aconteceu com o estoque?**
    R: O estoque foi reservado (deduzido) com sucesso no banco de dados do Estoque Service.
 2. **O pedido foi criado?**
@@ -82,10 +87,11 @@ O arquivo `docker-compose.yml` encontra-se na raiz do projeto. Ele foi responsá
    R: O padrão Saga. Especificamente, implementamos isso capturando a exceção ao salvar o pedido e fazendo uma chamada REST de rollback para o Estoque Service liberar os itens retidos, garantindo consistência eventual.
 
 ### Introduzindo RabbitMQ (Etapa 5)
+
 1. **Por que o Pedido Service publica em um Exchange em vez de enviar diretamente para uma Queue?**
    R: Porque o Exchange atua como um roteador de mensagens que dissocia o produtor (Pedido Service) do destino real (Filas). Publicar num Exchange permite que, no futuro, múltiplos microsserviços (ex: Serviço de E-mail, Serviço de Notificação) criem suas próprias filas (Queues) e façam o `bind` no mesmo Exchange para também receberem o evento `pedido.criado` (padrão Fanout ou Pub/Sub) sem mudar uma linha de código no produtor.
 2. **Qual é a diferença entre Exchange, Queue e Consumer?**
-   R: 
+   R:
    - **Exchange:** Ponto de entrada das mensagens publicadas, responsável por roteá-las.
    - **Queue:** Fila onde as mensagens ficam fisicamente armazenadas até serem processadas.
    - **Consumer:** Aplicação/microsserviço que se conecta à Queue para retirar e processar a mensagem.
@@ -93,7 +99,9 @@ O arquivo `docker-compose.yml` encontra-se na raiz do projeto. Ele foi responsá
    R: Não. O padrão de publicação baseada em eventos é "fire-and-forget". Ele não sabe da existência do Pagamento Service; apenas anuncia ao mundo (via RabbitMQ) um fato ocorrido ("pedido foi criado").
 
 ### Simulação de Falha (Etapa 8)
+
 *Derrubando o pagamento-service e criando novos pedidos:*
+
 1. **O pedido foi criado?**
    R: Sim, com sucesso e com status `AGUARDANDO_PAGAMENTO`.
 2. **O estoque foi atualizado?**
@@ -104,7 +112,9 @@ O arquivo `docker-compose.yml` encontra-se na raiz do projeto. Ele foi responsá
    R: Não. As mensagens continuaram sendo enfileiradas na fila `pedido.criado` de forma durável no RabbitMQ, aguardando o Pagamento Service voltar. (Podem ser vistas em "Ready" no painel do RabbitMQ).
 
 ### Recuperação (Etapa 9)
+
 *Subindo o pagamento-service novamente:*
+
 1. **O processamento precisou ser repetido manualmente?**
    R: Não. Assim que o Pagamento Service subiu, ele se reconectou ao RabbitMQ e consumiu todas as mensagens pendentes (backlog) automaticamente.
 2. **O Pedido Service precisou aguardar o Pagamento Service?**
@@ -113,7 +123,9 @@ O arquivo `docker-compose.yml` encontra-se na raiz do projeto. Ele foi responsá
    R: Ficaram retidas em estado `Ready` dentro da fila `pedido.criado` do RabbitMQ.
 
 ### Escalabilidade (Etapa 10)
+
 *Escalando para 2 instâncias o pagamento-service:*
+
 1. **As mensagens foram distribuídas?**
    R: Sim, o RabbitMQ usou o modelo "Competing Consumers", balanceando a carga (Round-Robin) entre a instância 1 e a instância 2.
 2. **Apenas uma instância processou cada mensagem?**
